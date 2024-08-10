@@ -1,7 +1,7 @@
 # 6561 - a base 3 version of 2048
 
 ## Description
-A twist on 2048, using powers of 3 instead! Was originally going to be called 3^11 since 2048 is 2^11, but it turns out that 177,147 isn't anywhere near as catchy. Currently terminal only
+Made as a small dip into Python, a twist on 2048, using powers of 3 instead! Was originally going to be called 3^11 since 2048 is 2^11, but it turns out that 177,147 isn't anywhere near as catchy. Currently terminal only
 
 ## Features
 - Able to run base 2048
@@ -12,7 +12,7 @@ A twist on 2048, using powers of 3 instead! Was originally going to be called 3^
 3  3  9  -> .  9  9 -> .  . 27
 .  .  .     .  .  .    .  .  .
 ```
-- Scaled to be able to implement the same features for standard base 2 2048, and also for base 4 and 5 versions of the game
+- Written in such a way so as to be able to implement the same features for a base 2 game, and also for base 4 and 5 versions of the game
 
 ## Planned features
 - A menu of choices at the beginning to decide game parameters
