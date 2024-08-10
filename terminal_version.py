@@ -155,7 +155,6 @@ class Board:
         print(f'Score: {self.score}')
         for row in self.board:
             print(' '.join([f'{str(col):<5}' for col in row]))
-            print()
         print()
 
     """Game loop: terminal version"""
