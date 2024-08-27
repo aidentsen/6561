@@ -15,10 +15,10 @@ Originally made as a Python exercise, still present [here](https://github.com/ai
 ```
 - CSS transitions for tiles being merged or added
 - Merges etc are staggered with a sleep function so you can see them happen
+- You can start a new game without reloading the webpage
 
 ## Potential additional GitHub Pages features
-- Option to reset game from the webpage without reloading the webpage
-- Popup window saying game over
+- Acknowledgement of game over
 - Mobile functionality (due to the event listener working with keypresses, it isn't currently playable on mobile)
 - The option to export score and game progress as a JSON file for later (perhaps implemented with hashing to make cheating a tiny bit less trivial)
 - Corresponding option to import score and game progress from previously
