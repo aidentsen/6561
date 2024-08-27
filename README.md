@@ -16,12 +16,13 @@ Originally made as a Python exercise, still present here. Now has a GitHub Pages
 - CSS transitions for tiles being merged or added
 - Merges etc are staggered with a sleep function so you can see them happen
 
-## Planned GitHub Pages features
-- The option to export score and game progress as a JSON file for later (perhaps implemented with hashing to make cheating a tiny bit less trivial)
-- Corresponding option to import score and game progress from previously
+## Potential additional GitHub Pages features
 - Option to reset game from the webpage without 
 - Popup window saying game over
 - Mobile functionality (due to the event listener working with keypresses, it isn't currently playable on mobile)
+- The option to export score and game progress as a JSON file for later (perhaps implemented with hashing to make cheating a tiny bit less trivial)
+- Corresponding option to import score and game progress from previously
+- Merge chain count and multiplier?
 
 ## Installation and technologies
 GitHub Pages version uses ES6 JavaScript, HTML and CSS, should require no installations
