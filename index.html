@@ -45,10 +45,11 @@
         <div class="grid-cell"></div>
     </div>
     <footer>
-        <div id="bottom-of-game-text">Play with the arrow keys or WASD!</div>
+        <div id="text">Play with the arrow keys or WASD!</div>
         <button id="restart-button">New Game</button>
         <button id="export-button">Save as JSON</button>
-        <button id="import-button">Load JSON</button>
+        <input type="file" id="load-input" accept="application/json">
+        <button id="load-button">Load JSON</button>
     </footer>
 </div>
 <script src="model.js" type="module"></script>

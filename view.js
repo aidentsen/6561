@@ -1,7 +1,8 @@
 export default class GameView {
-    constructor(gridElement, scoreElement) {
+    constructor(gridElement, scoreElement, textElement) {
         this.gridElement = gridElement;
         this.scoreElement = scoreElement;
+        this.textElement = textElement;
     }
 
     updateGrid(grid, movedTiles) {
@@ -33,6 +34,10 @@ export default class GameView {
 
     updateScore(score) {
         this.scoreElement.textContent = score;
+    }
+
+    updateText(text) {
+        this.textElement.textContent = text;
     }
 
     clearAnimations(cells) {

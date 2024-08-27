@@ -180,4 +180,8 @@ export default class GameModel {
         }
         return false;
     }
+
+    static isValidGameState(gameState) {
+        return true;
+    }
 }

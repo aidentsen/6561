@@ -38,6 +38,10 @@ h1 {
     margin: 20px;
 }
 
+#load-input {
+    display: none;
+}
+
 .grid-cell {
     background-color: #cdc1b4;
     border-radius: 5px;
