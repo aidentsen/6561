@@ -15,6 +15,9 @@ class GameController {
         // Set up the restart button properly
         const restartButton = document.getElementById('restart-button');
         restartButton.addEventListener('click', this.initializeGame.bind(this));
+
+        const exportButton = document.getElementById('export-button');
+        exportButton.addEventListener('click', this.exportGameProgress.bind(this));
     }
 
     initializeGame() {
@@ -78,6 +81,25 @@ class GameController {
                 document.removeEventListener('keydown', this.handleKeyPress.bind(this));
             }
         }
+    }
+
+    exportGameProgress() {
+        // Capture game state
+        const gameState = {
+            grid: this.model.grid,
+            score: this.model.score,
+            ninesGenerated: this.model.ninesGenerated
+        };
+
+        // Convert game state to JSON
+        const jsonString = JSON.stringify(gameState);
+        const blob = new Blob([jsonString], { type: 'application/json' });
+
+        // Download JSON
+        const a = document.creataElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = '6561-game-progress.json';
+        a.click();
     }
 }
 

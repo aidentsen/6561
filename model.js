@@ -2,7 +2,9 @@ export default class GameModel {
     initializeGame() {
         this.grid = Array(5).fill([]).map(() => Array(5).fill(0));
         this.score = 0;
+        this.ninesGenerated = 0;  // To be used for validating imported JSON files
         this.movedTiles = [];
+
         this.addRandomTile();
         this.addRandomTile();
     }
@@ -18,7 +20,13 @@ export default class GameModel {
         }
         if (emptyCells.length > 0) {
             const randomCell = emptyCells[Math.floor(Math.random() * emptyCells.length)];
-            this.grid[randomCell.row][randomCell.col] = Math.random() < 0.9 ? 3 : 9;
+            let randomRoll = Math.random();
+            if (randomRoll < 0.9) {
+                this.grid[randomCell.row][randomCell.col] = 3;
+            } else {
+                this.grid[randomCell.row][randomCell.col] = 9;
+                this.ninesGenerated++;
+            }
             this.movedTiles.push({ row: randomCell.row, col: randomCell.col, new: true });
         }
     }
