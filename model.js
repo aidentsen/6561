@@ -153,6 +153,7 @@ export default class GameModel {
                     return true;
                 }
 
+                /*
                 // If the grid is full, check for adjacent lines of three - needed if no merge
                 if (row < 3) {
                     if (this.grid[row][col] === this.grid[row + 1][col] &&
@@ -166,6 +167,7 @@ export default class GameModel {
                         return true;
                     }
                 }
+                 */
             }
         }
         return false;

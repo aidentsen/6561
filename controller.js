@@ -18,7 +18,7 @@ class GameController {
     async addRandomTile() {
         this.model.addRandomTile();
         this.view.updateGrid(this.model.grid, this.model.movedTiles);
-        await this.sleepNow(200);
+        await this.sleepNow(300);
     }
 
     async mergeCells() {
