@@ -10,6 +10,14 @@ class GameController {
         document.addEventListener('keydown', this.handleKeyPress.bind(this));
 
         // Initialize the game
+        this.initializeGame();
+
+        // Set up the restart button properly
+        const restartButton = document.getElementById('restart-button');
+        restartButton.addEventListener('click', this.initializeGame.bind(this));
+    }
+
+    initializeGame() {
         this.model.initializeGame();
         this.view.updateGrid(this.model.grid, this.model.movedTiles);
         this.view.updateScore(this.model.score);
@@ -36,6 +44,7 @@ class GameController {
 
     handleKeyPress(event) {
         let moved = false;
+        console.log('Key press');
 
         switch (event.key) {
             case 'ArrowUp':
