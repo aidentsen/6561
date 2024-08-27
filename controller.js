@@ -16,6 +16,7 @@ class GameController {
 
     handleKeyPress(event) {
         let moved = false;
+        let merged = false;
 
         switch (event.key) {
             case 'ArrowUp':
@@ -41,10 +42,24 @@ class GameController {
             this.view.updateScore(this.model.score);
 
             // Delay adding new tile to allow the movement animation to finish
+            console.log('Adding new tile...');
             setTimeout(() => {
                 this.model.addRandomTile();
                 this.view.updateGrid(this.model.grid, this.model.movedTiles);
             }, 200); // 200ms delay matches CSS transition time
+
+            console.log('Finding whether cells have merged');
+            merged = this.model.mergeCells();
+            while (merged) {
+                setTimeout(() => {
+                    this.view.updateGrid(this.model.grid, this.model.movedTiles);
+                    this.view.updateScore(this.model.score);
+                }, 200);
+                merged = this.model.mergeCells();
+                if (!merged) {
+                    break;
+                }
+            }
 
             if (!this.model.canMove()) {
                 console.log('Game over!');

@@ -23,57 +23,6 @@ export default class GameModel {
         }
     }
 
-    /*
-    moveLeft() {
-        this.movedTiles = [];
-        let moved = false;
-
-        for (let row = 0; row < 5; row++) {
-            let newRow = Array(5).fill(0);
-            let index = 0;
-            for (let col = 0; col < 5; col++) {
-                // Check if the tile in question has contents
-                if (this.grid[row][col] !== 0) {
-                    // Check for sequences of three identical adjacent tiles
-                    if (
-                        col < 3 &&
-                        this.grid[row][col] === this.grid[row][col + 1] &&
-                        this.grid[row][col] === this.grid[row][col + 2]
-                    ) {
-                        // Merge together the three identical tiles
-                        newRow[index] = this.grid[row][col] * 3;
-                        this.score += newRow[index];  // Update the score
-                        this.movedTiles.push({ row, col: index, merged: true });
-
-                        // Skip the next two columns as they have been merged into the first one
-                        col += 2;
-                        index++;
-                    } else {
-                        // Normal tile shift
-                        if (newRow[index] === 0) {
-                            newRow[index] = this.grid[row][col];
-                        } else {
-                            index++;
-                            newRow[index] = this.grid[row][col];
-                        }
-                    }
-                    moved = true;
-                }
-            }
-
-            // Update the row in the grid
-            for (let col = 0; col < 5; col++) {
-                if (this.grid[row][col] !== newRow[col]) {
-                    this.movedTiles.push({ row, col });
-                }
-                this.grid[row][col] = newRow[col];
-            }
-        }
-        return moved;
-    }
-
-     */
-
     moveLeft() {
         this.movedTiles = [];
         let moved = false;
@@ -114,7 +63,6 @@ export default class GameModel {
         return moved;
     }
 
-
     moveRight() {
         this.grid = this.grid.map(row => row.reverse());
         let moved = this.moveLeft();
@@ -144,26 +92,61 @@ export default class GameModel {
         return moved;
     }
 
-    /*
     mergeCells() {
-        let directions = [
-            { x: -1, y: 0 },  // Above
-            { x: 0, y: -1 },  // Left
-            { x: 1, y: 0 },  // Below
-            { x: 0, y: 1 }  // Right
-        ];
+        // Variable initialisation a la moveLeft()
         this.movedTiles = [];
         let moved = false;
 
+        // The row/col offsets for the four cardinal directions that can be merged in
+        let directions = [
+            { y: -1, x: 0 },  // Above
+            { y: 0, x: -1 },  // Left
+            { y: 1, x: 0 },  // Below
+            { y: 0, x: 1 }  // Right
+        ];
+
+        console.log('Trying to merge cells');
         for (let row = 0; row < 5; row++) {
             for (let col = 0; col < 5; col++) {
+                // If grid cell has a nonzero value
                 if (this.grid[row][col] !== 0) {
+                    let sameValueLocations = [];
+                    for (let direction of directions) {
+                        let newRow = row + direction.y;
+                        let newCol = col + direction.x;
 
+                        // Only try to check for locations inside the grid
+                        if (newRow >= 0 && newRow < 5 && newCol >= 0 && newCol < 5) {
+                            if (this.grid[row][col] === this.grid[newRow][newCol]) {
+                                sameValueLocations.push({ row: newRow, col: newCol });
+                                console.log(`Adding value to same value locations, which currently has length ${sameValueLocations.length}`);
+                            }
+
+                            // If there are three tiles with the same nonzero value centred on a central tile
+                            if (sameValueLocations.length === 2) {
+                                console.log('Merging should be occurring');
+                                // Update values
+                                this.grid[row][col] *= 3;
+                                this.score += this.grid[row][col];
+                                this.movedTiles.push({ row, col, merged: true });
+                                moved = true;
+
+                                // Clear the values of the non-central merged tiles
+                                for (let location of sameValueLocations) {
+                                    this.grid[location.row][location.col] = 0;
+                                    this.movedTiles.push({ row: location.row, col: location.col });
+                                }
+                                break;
+                            }
+                        }
+                    }
                 }
             }
         }
+        console.log(moved);
+
+        return moved;
     }
-     */
 
     canMove() {
         for (let row = 0; row < 5; row++) {
