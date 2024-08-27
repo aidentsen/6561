@@ -31,15 +31,15 @@ export default class GameModel {
             // Shift all the non-zero tiles left
             let newRow = this.grid[row].filter(value => value !== 0);
             while (newRow.length < 5) newRow.push(0);
-            if (newRow !== this.grid[row]) {  // If the tiles have been shifted, the state of the board has changed
-                console.log('Tiles shifted during first pass');
+            // If the tiles have been shifted, the state of the board has changed
+            if (newRow.toString() !== this.grid[row].toString()) {
+                // toString() is needed since non-primitive data types like arrays are compared based on reference
                 moved = true;
             }
 
             // Step 2: Merge three identical tiles
             for (let col = 0; col < 3; col++) {
                 if (newRow[col] !== 0 && newRow[col] === newRow[col + 1] && newRow[col] === newRow[col + 2]) {
-                    console.log('Tiles merged');
                     newRow[col] = newRow[col] * 3;  // Merge three tiles into one with triple the value
                     newRow[col + 1] = 0;  // Clear the next two tiles
                     newRow[col + 2] = 0;

@@ -18,13 +18,13 @@ class GameController {
     async addRandomTile() {
         this.model.addRandomTile();
         this.view.updateGrid(this.model.grid, this.model.movedTiles);
-        this.sleepNow(200);
+        await this.sleepNow(200);
     }
 
     async mergeCells() {
         let merged = this.model.mergeCells();
         while (merged) {
-            this.sleepNow(200);
+            await this.sleepNow(200);
             this.view.updateGrid(this.model.grid, this.model.movedTiles);
             this.view.updateScore(this.model.score);
             merged = this.model.mergeCells();
@@ -56,7 +56,6 @@ class GameController {
                 break;
         }
 
-        console.log(moved);
         if (moved) {
             this.view.updateGrid(this.model.grid, this.model.movedTiles);
             this.view.updateScore(this.model.score);
