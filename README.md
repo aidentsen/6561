@@ -3,7 +3,7 @@
 ## Description
 A twist on 2048, using powers of 3 instead! Was originally going to be called 3^11 since 2048 is 2^11, but it turns out that 177,147 isn't anywhere near as catchy
 
-Originally made as a Python exercise, still present here. Now has a GitHub Pages version implemented [here](https://aidentsen.github.io/6561/) in JavaScript, HTML and CSS
+Originally made as a Python exercise, still present [here](https://github.com/aidentsen/6561/blob/main/terminal_version.py). Now has a GitHub Pages version implemented [here](https://aidentsen.github.io/6561/) in JavaScript, HTML and CSS
 
 ## Features
 - To fit with base 3, now to merge values, you need to merge three in a row/column
@@ -17,7 +17,7 @@ Originally made as a Python exercise, still present here. Now has a GitHub Pages
 - Merges etc are staggered with a sleep function so you can see them happen
 
 ## Potential additional GitHub Pages features
-- Option to reset game from the webpage without 
+- Option to reset game from the webpage without reloading the webpage
 - Popup window saying game over
 - Mobile functionality (due to the event listener working with keypresses, it isn't currently playable on mobile)
 - The option to export score and game progress as a JSON file for later (perhaps implemented with hashing to make cheating a tiny bit less trivial)
