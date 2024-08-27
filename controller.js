@@ -47,7 +47,6 @@ class GameController {
 
     handleKeyPress(event) {
         let moved = false;
-        console.log('Key press');
 
         switch (event.key) {
             case 'ArrowUp':
@@ -96,7 +95,7 @@ class GameController {
         const blob = new Blob([jsonString], { type: 'application/json' });
 
         // Download JSON
-        const a = document.creataElement('a');
+        const a = document.createElement('a');
         a.href = URL.createObjectURL(blob);
         a.download = '6561-game-progress.json';
         a.click();
