@@ -32,12 +32,14 @@ export default class GameModel {
             let newRow = this.grid[row].filter(value => value !== 0);
             while (newRow.length < 5) newRow.push(0);
             if (newRow !== this.grid[row]) {  // If the tiles have been shifted, the state of the board has changed
+                console.log('Tiles shifted during first pass');
                 moved = true;
             }
 
             // Step 2: Merge three identical tiles
             for (let col = 0; col < 3; col++) {
                 if (newRow[col] !== 0 && newRow[col] === newRow[col + 1] && newRow[col] === newRow[col + 2]) {
+                    console.log('Tiles merged');
                     newRow[col] = newRow[col] * 3;  // Merge three tiles into one with triple the value
                     newRow[col + 1] = 0;  // Clear the next two tiles
                     newRow[col + 2] = 0;
@@ -105,7 +107,6 @@ export default class GameModel {
             { y: 0, x: 1 }  // Right
         ];
 
-        console.log('Trying to merge cells');
         for (let row = 0; row < 5; row++) {
             for (let col = 0; col < 5; col++) {
                 // If grid cell has a nonzero value
@@ -119,12 +120,10 @@ export default class GameModel {
                         if (newRow >= 0 && newRow < 5 && newCol >= 0 && newCol < 5) {
                             if (this.grid[row][col] === this.grid[newRow][newCol]) {
                                 sameValueLocations.push({ row: newRow, col: newCol });
-                                console.log(`Adding value to same value locations, which currently has length ${sameValueLocations.length}`);
                             }
 
                             // If there are three tiles with the same nonzero value centred on a central tile
                             if (sameValueLocations.length === 2) {
-                                console.log('Merging should be occurring');
                                 // Update values
                                 this.grid[row][col] *= 3;
                                 this.score += this.grid[row][col];
@@ -143,8 +142,6 @@ export default class GameModel {
                 }
             }
         }
-        console.log(moved);
-
         return moved;
     }
 

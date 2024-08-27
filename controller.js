@@ -5,6 +5,7 @@ class GameController {
     constructor(model, view) {
         this.model = model;
         this.view = view;
+        this.sleepNow = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
 
         document.addEventListener('keydown', this.handleKeyPress.bind(this));
 
@@ -14,55 +15,59 @@ class GameController {
         this.view.updateScore(this.model.score);
     }
 
+    async addRandomTile() {
+        this.model.addRandomTile();
+        this.view.updateGrid(this.model.grid, this.model.movedTiles);
+        this.sleepNow(200);
+    }
+
+    async mergeCells() {
+        let merged = this.model.mergeCells();
+        while (merged) {
+            this.sleepNow(200);
+            this.view.updateGrid(this.model.grid, this.model.movedTiles);
+            this.view.updateScore(this.model.score);
+            merged = this.model.mergeCells();
+            if (!merged) {
+                break;
+            }
+        }
+    }
+
     handleKeyPress(event) {
         let moved = false;
-        let merged = false;
 
         switch (event.key) {
             case 'ArrowUp':
-            case 'W':
+            case 'w':
                 moved = this.model.moveUp();
                 break;
             case 'ArrowDown':
-            case 'S':
+            case 's':
                 moved = this.model.moveDown();
                 break;
             case 'ArrowLeft':
-            case 'A':
+            case 'a':
                 moved = this.model.moveLeft();
                 break;
             case 'ArrowRight':
-            case 'D':
+            case 'd':
                 moved = this.model.moveRight();
                 break;
         }
 
+        console.log(moved);
         if (moved) {
             this.view.updateGrid(this.model.grid, this.model.movedTiles);
             this.view.updateScore(this.model.score);
 
-            // Delay adding new tile to allow the movement animation to finish
-            console.log('Adding new tile...');
-            setTimeout(() => {
-                this.model.addRandomTile();
-                this.view.updateGrid(this.model.grid, this.model.movedTiles);
-            }, 200); // 200ms delay matches CSS transition time
-
-            console.log('Finding whether cells have merged');
-            merged = this.model.mergeCells();
-            while (merged) {
-                setTimeout(() => {
-                    this.view.updateGrid(this.model.grid, this.model.movedTiles);
-                    this.view.updateScore(this.model.score);
-                }, 200);
-                merged = this.model.mergeCells();
-                if (!merged) {
-                    break;
-                }
-            }
+            // Add and merge cells on appropriate actual delays
+            this.addRandomTile();
+            this.mergeCells();
 
             if (!this.model.canMove()) {
                 console.log('Game over!');
+                document.removeEventListener('keydown', this.handleKeyPress.bind(this));
             }
         }
     }
