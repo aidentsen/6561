@@ -31,12 +31,10 @@ class GameController {
         this.view.updateScore(this.model.score);
         this.view.updateText('Play with the arrow keys or WASD!');
 
-        document.addEventListener('DOMContentLoaded', () => {
-            // Set up controls
-            document.addEventListener('keydown', this.handleKeyPress.bind(this));
-            // this.setupTouchControls();
-            this.setupHammer();
-        });
+        // Set up controls
+        document.addEventListener('keydown', this.handleKeyPress.bind(this));
+        // this.setupTouchControls();
+        this.setupHammer();
     }
 
     async addRandomTile() {
