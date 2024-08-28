@@ -141,7 +141,7 @@ class GameController {
 
     handleTouchEnd(event) {
         // event.preventDefault();
-        const touch = event.touches ? event.touches[0] : event;
+        const touch = event.changedTouches ? event.changedTouches[0] : event;
         let endX = touch.clientX;
         let endY = touch.clientY;
 
