@@ -136,9 +136,11 @@ class GameController {
         const touch = event.touches ? event.touches[0] : event;
         this.startX = touch.clientX;
         this.startY = touch.clientY;
+        this.view.updateText('Touch detected');
     }
 
     handleTouchEnd(event) {
+        this.view.updateText('Touch ended');
         event.preventDefault();
         const touch = event.touches ? event.touches[0] : event;
         endX = touch.clientX;
@@ -147,7 +149,7 @@ class GameController {
     }
 
     handleSwipe(startX, startY, endX, endY) {
-        const minThreshold = 30;
+        const minThreshold = 10;
         const diffX = endX - startX;
         const diffY = endY - startY;
         let moved = false;
