@@ -132,7 +132,7 @@ class GameController {
     }
 
     handleTouchStart(event) {
-        // event.preventDefault();
+        event.preventDefault();
         const touch = event.touches ? event.touches[0] : event;
         this.startX = touch.clientX;
         this.startY = touch.clientY;
@@ -140,7 +140,7 @@ class GameController {
     }
 
     handleTouchEnd(event) {
-        // event.preventDefault();
+        event.preventDefault();
         const touch = event.changedTouches ? event.changedTouches[0] : event;
         let endX = touch.clientX;
         let endY = touch.clientY;
