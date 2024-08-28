@@ -2,12 +2,14 @@ body {
     font-family: "Arial", sans-serif;
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     min-height: 100vh; /* Changed from height to min-height for better handling on smaller screens */
     margin: 0;
     background-color: #faf8ef;
-    padding: 20px; /* Added padding for better spacing on smaller screens */
+    padding: 0;
     box-sizing: border-box; /* Ensures padding is included in dimensions */
+    overflow: hidden;
+    flex-direction: column;
 }
 
 .game-container {
@@ -25,6 +27,7 @@ h1 {
 
 .score-container {
     margin-bottom: 20px;
+    font-size: 4vw;
 }
 
 #grid-container {
@@ -69,21 +72,6 @@ button {
     transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
 }
 
-/* Media query for larger screens */
-@media (min-width: 768px) {
-    h1 {
-        font-size: 48px; /* Fixed font size for larger screens */
-    }
-
-    #text, button {
-        font-size: 18px; /* Fixed font size for larger screens */
-    }
-
-    .grid-cell {
-        font-size: 24px; /* Fixed font size for larger screens */
-    }
-}
-
 .tile-new {
     animation: pop-in 0.3s ease;
 }
@@ -124,3 +112,34 @@ button {
 .tile-19683 { background-color: #ffabfb; }
 .tile-59049 { background-color: #c698fa; }
 .tile-177147 { background-color: #8decf3; }
+
+/* Ensures proper centring on small devices */
+@media (max-width: 375px) {
+    html, body {
+        min-height: 100vh;
+        display: block; /* Fall back to block display for better compatibility */
+    }
+
+    body {
+        padding: 0; /* Removes any extra padding */
+    }
+
+    .game-container {
+        margin-top: 20px; /* Adds some space at the top */
+    }
+}
+
+/* Media query for larger screens */
+@media (min-width: 768px) {
+    h1 {
+        font-size: 48px; /* Fixed font size for larger screens */
+    }
+
+    #text, button {
+        font-size: 18px; /* Fixed font size for larger screens */
+    }
+
+    .grid-cell {
+        font-size: 24px; /* Fixed font size for larger screens */
+    }
+}
