@@ -10,8 +10,8 @@ html, body {
 
 body {
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
+    justify-content: flex-start;
+    align-items: center;
     flex-direction: column;
     min-height: 100%; /* Allow content to fill height */
     padding: 20px; /* Add padding for breathing room on small screens */
