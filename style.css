@@ -43,7 +43,7 @@ h1 {
 }
 
 #text {
-    margin: 20px 20px 10px 20px;
+    margin: 20px 20px 10px 20px; /* Top, right, bottom, left */
     font-size: 4vw; /* Responsive font size */
 }
 
