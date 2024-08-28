@@ -21,7 +21,7 @@ class GameController {
         exportButton.addEventListener('click', this.exportGameProgress.bind(this));
 
         // Set up load button
-        setupLoadButton();
+        this.setupLoadButton();
     }
 
     initializeGame() {
@@ -75,6 +75,7 @@ class GameController {
         if (moved) {
             this.view.updateGrid(this.model.grid, this.model.movedTiles);
             this.view.updateScore(this.model.score);
+            this.view.updateText('Play with the arrow keys or WASD!');
 
             // Add and merge cells on appropriate actual delays
             this.addRandomTile();
@@ -138,6 +139,8 @@ class GameController {
                 this.view.updateText('Invalid game state file');
             }
         };
+
+        reader.readAsText(file);
     }
 }
 

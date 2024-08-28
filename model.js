@@ -182,6 +182,51 @@ export default class GameModel {
     }
 
     static isValidGameState(gameState) {
-        return true;
+        /*
+        There are three requirements:
+        1. Property validation: there needs to be properties for grid, score and ninesGenerated
+        2. Basic validation: grid size needs to be 5x5, and the values present in the grid need to be possible
+        3. Grid/score comparison: score has to work out with the numbers in the grid and the number of nines generated
+         */
+
+        // Used for evaluating whether array entries are valid
+        function isPowerofThreeorZero(num) {
+            if (num === 0) return true;  // For empty tiles
+            if (num < 1) return false;
+            while (num % 3 === 0) num /= 3;
+            return num === 1;
+        }
+
+        const oneOverLog3 = 1 / Math.log(3);  // Faster to precalculate this value in advance
+        // Calculates the maximum expected number of points that could be added to the score from the generation of num
+        function pointsToMake(num) {
+            if (num === 0) return 0;  // Needed since log(0) is undefined
+            let log3num = Math.round(Math.log(num) * oneOverLog3);
+            return num * (log3num - 1);
+        }
+
+        // In case there are any errors referencing the expected properties
+        try {
+            // Check if the grid given is a 5x5 array, and if the contents seem valid
+            if (!Array.isArray(grid) || grid.length !== 5) return false;
+            // Keep track of what the score should be assuming that no nines are generated
+            let scoreCalculation = 0;
+            for (let row of grid) {
+                if (!Array.isArray(row) || row.length !== 5) return false;
+
+                // Check if each element is an integer and either 0 or a power of three
+                for (let cell of row) {
+                    if (!Number.isInteger(cell) || !isPowerofThreeorZero(cell)) return false;
+                    scoreCalculation += pointsToMake(cell);
+                }
+            }
+
+            // Account for the score loss from nines having been generated when new tiles are added
+            const scoreLossFromNines = gameState.ninesGenerated * 9;
+            // Return whether the score is as expected
+            return scoreCalculation - scoreLossFromNines === gameState.score ? true : false;
+        } catch {
+            return false;
+        }
     }
 }
