@@ -90,11 +90,13 @@ class GameController {
     }
 
     handleTouchStart(event) {
+        event.preventDefault();
         this.startX = event.touches[0].clientX;
         this.startY = event.touches[0].clientY;
     }
 
     handleTouchEnd(event) {
+        event.preventDefault();
         endX = event.touches[0].clientX;
         endY = event.touches[0].clientY;
         this.handleSwipe(this.startX, this.startY, endX, endY);
@@ -126,6 +128,8 @@ class GameController {
     }
 
     handleMoved() {
+        console.log('Event listener triggered');
+
         this.view.updateGrid(this.model.grid, this.model.movedTiles);
         this.view.updateScore(this.model.score);
         this.view.updateText('Play with the arrow keys or WASD!');
