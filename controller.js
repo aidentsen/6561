@@ -152,6 +152,7 @@ class GameController {
         const minThreshold = 10;
         const diffX = endX - startX;
         const diffY = endY - startY;
+        this.view.updateText(`diffX: ${diffX}; diffY: ${diffY}`);
         let moved = false;
 
         if (Math.abs(diffX) > Math.abs(diffY)) {
