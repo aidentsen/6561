@@ -33,7 +33,8 @@ class GameController {
 
         // Set up controls
         document.addEventListener('keydown', this.handleKeyPress.bind(this));
-        this.setupTouchControls();
+        // this.setupTouchControls();
+        this.setupHammer();
     }
 
     async addRandomTile() {
@@ -80,6 +81,42 @@ class GameController {
         if (moved) this.handleMoved();
     }
 
+    // Hammer.js attempt
+    setupHammer() {
+        const gridContainer = document.getElementById('grid-container');
+
+        // Initialise Hammer.js on the grid container
+        this.hammer = new Hammer(gridcontainer);
+
+        // Add event listeners for the swipe gestures
+        this.hammer.on('swipeleft', () => this.handleSwipe('left'));
+        this.hammer.on('swiperight', () => this.handleSwipe('right'));
+        this.hammer.on('swipeup', () => this.handleSwipe('up'));
+        this.hammer.on('swipedown', () => this.handleSwipe('down'));
+    }
+
+    handleSwipe(direction) {
+        let moved = false;
+
+        switch (direction) {
+            case 'left':
+                moved = this.model.moveLeft();
+                break;
+            case 'right':
+                moved = this.model.moveRight();
+                break;
+            case 'up':
+                moved = this.model.moveUp();
+                break;
+            case 'down':
+                moved = this.model.moveDown();
+                break;
+        }
+
+        if (moved) this.handleMoved();
+    }
+
+    /*
     setupTouchControls() {
         let startX, startY, endX, endY;
         const gridContainer = document.getElementById('grid-container');
@@ -130,6 +167,7 @@ class GameController {
 
         if (moved) this.handleMoved();
     }
+    */
 
     handleMoved() {
         console.log('Event listener triggered');
@@ -145,9 +183,14 @@ class GameController {
         if (!this.model.canMove()) {
             this.view.updateText('Game over!');
             document.removeEventListener('keydown', this.handleKeyPress.bind(this));
+
+            /*
             const gridContainer = document.getElementById('grid-container');
             gridContainer.removeEventListener(this.touchStartEvent, this.handleTouchStart.bind(this));
             gridContainer.removeEventListener(this.touchEndEvent, this.handleTouchEnd.bind(this));
+             */
+
+            this.hammer.off();
         }
     }
 
