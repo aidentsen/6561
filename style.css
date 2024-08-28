@@ -3,17 +3,20 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh; /* Changed from height to min-height for better handling on smaller screens */
     margin: 0;
     background-color: #faf8ef;
+    padding: 20px; /* Added padding for better spacing on smaller screens */
 }
 
 .game-container {
     text-align: center;
+    width: 100%; /* Ensures the container takes up the full width of the screen */
+    max-width: 600px; /* Restricts the maximum width for larger screens */
 }
 
 h1 {
-    font-size: 48px;
+    font-size: 8vw; /* Responsive font size based on viewport width */
     margin: 20px 0;
     color: #776e65;
 }
@@ -23,8 +26,10 @@ h1 {
 }
 
 #grid-container {
-    width: 450px;
-    height: 450px;
+    width: 100%; /* Set width to 100% to allow the grid to resize with the container */
+    max-width: 450px; /* Restricts the maximum grid size */
+    height: auto; /* Allows height to adjust according to content */
+    aspect-ratio: 1; /* Ensures the grid maintains a square shape */
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(5, 1fr);
@@ -36,10 +41,13 @@ h1 {
 
 #text {
     margin: 20px;
+    font-size: 4vw; /* Responsive font size */
 }
 
 button {
     margin: 0 10px;  /* Top and bottom margin, then left and right */
+    padding: 10px 20px; /* Added padding for better touch support */
+    font-size: 4vw; /* Responsive font size */
 }
 
 #load-input {
@@ -52,10 +60,25 @@ button {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 24px;
+    font-size: 6vw; /* Responsive font size */
     font-weight: bold;
     color: #f9f6f2;
     transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+
+/* Media query for larger screens */
+@media (min-width: 768px) {
+    h1 {
+        font-size: 48px; /* Fixed font size for larger screens */
+    }
+
+    #text, button {
+        font-size: 18px; /* Fixed font size for larger screens */
+    }
+
+    .grid-cell {
+        font-size: 24px; /* Fixed font size for larger screens */
+    }
 }
 
 .tile-new {
