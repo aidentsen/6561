@@ -51,8 +51,6 @@ h1 {
     margin: 0 auto; /* Centres grid container */
     box-sizing: border-box;
     position: relative;
-    left: 50%;
-    transform: translateX(-50%);
 }
 
 #text {
