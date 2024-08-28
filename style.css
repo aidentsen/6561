@@ -5,6 +5,7 @@ html, body {
     background-color: #faf8ef;
     height: 100%;
     box-sizing: border-box;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
 body {
@@ -14,7 +15,7 @@ body {
     flex-direction: column;
     min-height: 100%; /* Allow content to fill height */
     padding: 20px; /* Add padding for breathing room on small screens */
-    overflow-x: hidden; /* Prevent horizontal scrolling */
+    overflow-y: auto;
 }
 
 .game-container {
@@ -50,7 +51,6 @@ h1 {
     border-radius: 10px;
     margin: 0 auto; /* Centres grid container */
     box-sizing: border-box;
-    position: relative;
 }
 
 #text {
