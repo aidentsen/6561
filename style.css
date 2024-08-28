@@ -8,7 +8,7 @@ body {
     background-color: #faf8ef;
     padding: 0;
     box-sizing: border-box; /* Ensures padding is included in dimensions */
-    overflow: hidden;
+    overflow-x: hidden;
     flex-direction: column;
 }
 
@@ -116,8 +116,10 @@ button {
 /* Ensures proper centring on small devices */
 @media (max-width: 375px) {
     html, body {
-        max-height: 100vh;
-        display: block; /* Fall back to block display for better compatibility */
+        align-items: flex-start;
+        min-height: 100vh;
+        height: auto;
+        overflow-y: auto;
     }
 
     body {
@@ -125,7 +127,7 @@ button {
     }
 
     .game-container {
-        margin-top: 20px; /* Adds some space at the top */
+        padding: 10px;
     }
 }
 
