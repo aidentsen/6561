@@ -137,7 +137,7 @@ button {
     }
 
     .grid-cell {
-        font-size: 7vw; /* Increase font size inside grid cells */
+        font-size: 4vw; /* Increase font size inside grid cells */
     }
 
     #grid-container {
