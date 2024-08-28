@@ -49,7 +49,7 @@ h1 {
     background-color: #bbada0;
     padding: 10px;
     border-radius: 10px;
-    margin: 0 auto; /* Centres grid container */
+    margin: 20px auto; /* Centres grid container */
     box-sizing: border-box;
 }
 
@@ -140,8 +140,7 @@ button {
     }
 
     #grid-container {
-        left: 50%;
-        transform: translateX(-50%);
+        margin: 20px auto;
     }
 }
 
