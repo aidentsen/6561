@@ -51,7 +51,6 @@ h1 {
     border-radius: 10px;
     margin: 20px auto; /* Centres grid container */
     box-sizing: border-box;
-    touch-action: manipulation; /* Disables default touch actions */
 }
 
 #text {
