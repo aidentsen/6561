@@ -2,7 +2,7 @@ body {
     font-family: "Arial", sans-serif;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     min-height: 100vh; /* Changed from height to min-height for better handling on smaller screens */
     margin: 0;
     background-color: #faf8ef;
@@ -13,6 +13,7 @@ body {
     text-align: center;
     width: 100%; /* Ensures the container takes up the full width of the screen */
     max-width: 600px; /* Restricts the maximum width for larger screens */
+    margin: 0 auto; /* Horizontally centres the container */
 }
 
 h1 {
@@ -37,6 +38,7 @@ h1 {
     background-color: #bbada0;
     padding: 10px;
     border-radius: 10px;
+    margin: 0 auto; /* Centres grid container */
 }
 
 #text {
