@@ -5,7 +5,6 @@ class GameController {
     constructor(model, view) {
         this.model = model;
         this.view = view;
-        this.defaultMessage = 'Play with arrow keys, WASD, or mobile touches!';
         this.sleepNow = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
 
         // Set up the restart button properly
@@ -30,7 +29,7 @@ class GameController {
         // Initialise the view
         this.view.updateGrid(this.model.grid, this.model.movedTiles);
         this.view.updateScore(this.model.score);
-        this.view.updateText(this.defaultMessage);
+        this.view.updateText('Play with arrow keys, WASD, or mobile touches!');
 
         // Set up controls
         document.addEventListener('keydown', this.handleKeyPress.bind(this));
@@ -129,7 +128,7 @@ class GameController {
     handleMoved() {
         this.view.updateGrid(this.model.grid, this.model.movedTiles);
         this.view.updateScore(this.model.score);
-        this.view.updateText(this.defaultMessage);
+        this.view.updateText('Play with arrow keys, WASD, or mobile touches!');
 
         // Add and merge cells on appropriate actual delays
         this.addRandomTile();
