@@ -208,10 +208,10 @@ export default class GameModel {
         // In case there are any errors referencing the expected properties
         try {
             // Check if the grid given is a 5x5 array, and if the contents seem valid
-            if (!Array.isArray(grid) || grid.length !== 5) return false;
+            if (!Array.isArray(gameState.grid) || gameState.grid.length !== 5) return false;
             // Keep track of what the score should be assuming that no nines are generated
             let scoreCalculation = 0;
-            for (let row of grid) {
+            for (let row of gameState.grid) {
                 if (!Array.isArray(row) || row.length !== 5) return false;
 
                 // Check if each element is an integer and either 0 or a power of three
@@ -224,6 +224,7 @@ export default class GameModel {
             // Account for the score loss from nines having been generated when new tiles are added
             const scoreLossFromNines = gameState.ninesGenerated * 9;
             // Return whether the score is as expected
+            console.log(scoreCalculation - scoreLossFromNines);
             return scoreCalculation - scoreLossFromNines === gameState.score ? true : false;
         } catch {
             return false;
