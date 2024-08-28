@@ -31,10 +31,12 @@ class GameController {
         this.view.updateScore(this.model.score);
         this.view.updateText('Play with the arrow keys or WASD!');
 
-        // Set up controls
-        document.addEventListener('keydown', this.handleKeyPress.bind(this));
-        // this.setupTouchControls();
-        this.setupHammer();
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set up controls
+            document.addEventListener('keydown', this.handleKeyPress.bind(this));
+            // this.setupTouchControls();
+            this.setupHammer();
+        });
     }
 
     async addRandomTile() {
@@ -86,7 +88,7 @@ class GameController {
         const gridContainer = document.getElementById('grid-container');
 
         // Initialise Hammer.js on the grid container
-        this.hammer = new Hammer(gridcontainer);
+        this.hammer = new Hammer(gridContainer);
 
         // Add event listeners for the swipe gestures
         this.hammer.on('swipeleft', () => this.handleSwipe('left'));
