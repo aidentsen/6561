@@ -93,14 +93,16 @@ class GameController {
 
     handleTouchStart(event) {
         event.preventDefault();
-        this.startX = event.touches[0].clientX;
-        this.startY = event.touches[0].clientY;
+        const touch = event.touches ? event.touches[0] : event;
+        this.startX = touch.clientX;
+        this.startY = touch.clientY;
     }
 
     handleTouchEnd(event) {
         event.preventDefault();
-        endX = event.touches[0].clientX;
-        endY = event.touches[0].clientY;
+        const touch = event.touches ? event.touches[0] : event;
+        endX = touch.clientX;
+        endY = touch.clientY;
         this.handleSwipe(this.startX, this.startY, endX, endY);
     }
 
