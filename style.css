@@ -34,8 +34,12 @@ h1 {
     border-radius: 10px;
 }
 
-#bottom-of-game-text {
+#text {
     margin: 20px;
+}
+
+button {
+    margin: 0 10px;
 }
 
 #load-input {
