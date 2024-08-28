@@ -81,45 +81,6 @@ class GameController {
         if (moved) this.handleMoved();
     }
 
-    /*
-    // Hammer.js attempt
-    setupHammer() {
-        const gridContainer = document.getElementById('grid-container');
-
-        // Initialise Hammer.js on the grid container
-        this.hammer = new Hammer.Manager(gridContainer);
-        let swipe = new Hammer.Swipe();
-        this.hammer.add(swipe);
-
-        // Add event listeners for the swipe gestures
-        this.hammer.on('swipeleft', () => this.handleSwipe('left'));
-        this.hammer.on('swiperight', () => this.handleSwipe('right'));
-        this.hammer.on('swipeup', () => this.handleSwipe('up'));
-        this.hammer.on('swipedown', () => this.handleSwipe('down'));
-    }
-
-    handleSwipe(direction) {
-        let moved = false;
-
-        switch (direction) {
-            case 'left':
-                moved = this.model.moveLeft();
-                break;
-            case 'right':
-                moved = this.model.moveRight();
-                break;
-            case 'up':
-                moved = this.model.moveUp();
-                break;
-            case 'down':
-                moved = this.model.moveDown();
-                break;
-        }
-
-        if (moved) this.handleMoved();
-    }
-     */
-
     setupTouchControls() {
         const gridContainer = document.getElementById('grid-container');
 
@@ -165,37 +126,7 @@ class GameController {
         if (moved) this.handleMoved();
     }
 
-    /*
-    handleSwipe(startX, startY, endX, endY) {
-        const minThreshold = 30;
-        const diffX = endX - startX;
-        const diffY = endY - startY;
-        this.view.updateText(`diffX: ${diffX}; diffY: ${diffY}`);
-        let moved = false;
-
-        if (Math.abs(diffX) > Math.abs(diffY)) {
-            // Horizontal swipe
-            if (diffX > minThreshold) {
-                moved = this.model.moveRight();
-            } else if (diffX < -minThreshold) {
-                moved = this.model.moveLeft();
-            }
-        } else {
-            // Vertical swipe
-            if (diffY > minThreshold) {
-                moved = this.model.moveDown();
-            } else if (diffY < -minThreshold) {
-                moved = this.model.moveUp();
-            }
-        }
-
-        if (moved) this.handleMoved();
-    }
-     */
-
     handleMoved() {
-        console.log('Event listener triggered');
-
         this.view.updateGrid(this.model.grid, this.model.movedTiles);
         this.view.updateScore(this.model.score);
         this.view.updateText('Play with the arrow keys or WASD!');
@@ -208,13 +139,9 @@ class GameController {
             this.view.updateText('Game over!');
             document.removeEventListener('keydown', this.handleKeyPress.bind(this));
 
-            // /*
             const gridContainer = document.getElementById('grid-container');
             gridContainer.removeEventListener(this.touchStartEvent, this.handleTouchStart.bind(this));
             gridContainer.removeEventListener(this.touchEndEvent, this.handleTouchEnd.bind(this));
-            // */
-
-            // this.hammer.off();
         }
     }
 
