@@ -33,8 +33,8 @@ class GameController {
 
         // Set up controls
         document.addEventListener('keydown', this.handleKeyPress.bind(this));
-        // this.setupTouchControls();
-        this.setupHammer();
+        this.setupTouchControls();
+        // this.setupHammer();
     }
 
     async addRandomTile() {
@@ -81,13 +81,15 @@ class GameController {
         if (moved) this.handleMoved();
     }
 
+    /*
     // Hammer.js attempt
     setupHammer() {
         const gridContainer = document.getElementById('grid-container');
 
         // Initialise Hammer.js on the grid container
         this.hammer = new Hammer.Manager(gridContainer);
-        this.hammer.add(Hammer.Swipe());
+        let swipe = new Hammer.Swipe();
+        this.hammer.add(swipe);
 
         // Add event listeners for the swipe gestures
         this.hammer.on('swipeleft', () => this.handleSwipe('left'));
@@ -116,8 +118,8 @@ class GameController {
 
         if (moved) this.handleMoved();
     }
+     */
 
-    /*
     setupTouchControls() {
         let startX, startY, endX, endY;
         const gridContainer = document.getElementById('grid-container');
@@ -168,7 +170,6 @@ class GameController {
 
         if (moved) this.handleMoved();
     }
-    */
 
     handleMoved() {
         console.log('Event listener triggered');
@@ -185,13 +186,13 @@ class GameController {
             this.view.updateText('Game over!');
             document.removeEventListener('keydown', this.handleKeyPress.bind(this));
 
-            /*
+            // /*
             const gridContainer = document.getElementById('grid-container');
             gridContainer.removeEventListener(this.touchStartEvent, this.handleTouchStart.bind(this));
             gridContainer.removeEventListener(this.touchEndEvent, this.handleTouchEnd.bind(this));
-             */
+            // */
 
-            this.hammer.off();
+            // this.hammer.off();
         }
     }
 
