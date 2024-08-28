@@ -22,6 +22,7 @@ body {
     width: 100%; /* Ensures the container takes up the full width of the screen */
     max-width: 600px; /* Restricts the maximum width for larger screens */
     margin: 0 auto; /* Horizontally centres the container */
+    box-sizing: border-box;
 }
 
 h1 {
@@ -48,6 +49,7 @@ h1 {
     padding: 10px;
     border-radius: 10px;
     margin: 0 auto; /* Centres grid container */
+    box-sizing: border-box;
 }
 
 #text {
@@ -134,6 +136,11 @@ button {
 
     .grid-cell {
         font-size: 7vw; /* Increase font size inside grid cells */
+    }
+
+    #grid-container {
+        margin-left: auto;
+        margin-right: auto;
     }
 }
 
