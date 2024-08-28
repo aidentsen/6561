@@ -43,12 +43,12 @@ h1 {
 }
 
 #text {
-    margin: 20px;
+    margin: 20px 20px 10px 20px;
     font-size: 4vw; /* Responsive font size */
 }
 
 button {
-    margin: 0 10px;  /* Top and bottom margin, then left and right */
+    margin: 10px 10px;  /* Top and bottom margin, then left and right */
     padding: 10px 20px; /* Added padding for better touch support */
     font-size: 4vw; /* Responsive font size */
 }
