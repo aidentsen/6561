@@ -17,6 +17,7 @@ Core features
 .  .  .     .  .  .    .  .  .
 ```
 - A new game can be started without reloading the webpage
+- Works on both PC and mobile (after much pain...)
 
 Quality of life
 - CSS transitions for tiles that are moved, merged or added
@@ -24,11 +25,6 @@ Quality of life
 - In-progress games can be exported as a JSON file for later...
 - ...and then re-imported and validated to continue!
 - Text indicator for game over or invalid JSON file passed
-
-## Potential additional GitHub Pages additions
-- Mobile functionality (due to the event listener working with keypresses, it isn't currently playable on mobile)
-- Basic CSS touch-up (primarily buttons and text)
-- CSS responsive design
 
 ## Installation and technologies
 GitHub Pages version uses ES6 JavaScript, HTML and CSS, should require no installations
