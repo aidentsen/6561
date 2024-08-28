@@ -5,6 +5,7 @@ class GameController {
     constructor(model, view) {
         this.model = model;
         this.view = view;
+        this.defaultMessage = 'Play with arrow keys, WASD, or mobile touches!';
         this.sleepNow = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
 
         // Set up the restart button properly
@@ -29,12 +30,11 @@ class GameController {
         // Initialise the view
         this.view.updateGrid(this.model.grid, this.model.movedTiles);
         this.view.updateScore(this.model.score);
-        this.view.updateText('Play with the arrow keys or WASD!');
+        this.view.updateText(this.defaultMessage);
 
         // Set up controls
         document.addEventListener('keydown', this.handleKeyPress.bind(this));
         this.setupTouchControls();
-        // this.setupHammer();
     }
 
     async addRandomTile() {
@@ -98,7 +98,7 @@ class GameController {
 
     handleTouchEnd(event) {
         event.preventDefault();
-        const touch = event.changedTouches[0];
+        const touch = event.changedTouches[0];  // touchend uses changedTouches instead of touches
         let endX = touch.clientX;
         let endY = touch.clientY;
 
@@ -129,7 +129,7 @@ class GameController {
     handleMoved() {
         this.view.updateGrid(this.model.grid, this.model.movedTiles);
         this.view.updateScore(this.model.score);
-        this.view.updateText('Play with the arrow keys or WASD!');
+        this.view.updateText(this.defaultMessage);
 
         // Add and merge cells on appropriate actual delays
         this.addRandomTile();
@@ -177,7 +177,6 @@ class GameController {
     loadGameProgress(event) {
         const file = event.target.files[0];
         if (file) {
-            console.log('File accepted');
             const reader = new FileReader();
 
             reader.onload = (event) => {
@@ -194,7 +193,7 @@ class GameController {
                     this.view.updateGrid(this.model.grid, this.model.movedTiles);
                     this.view.updateScore(this.model.score);
                 } else {
-                    this.view.updateText('Invalid game state file');
+                    this.view.updateText('Invalid game file');
                 }
             };
 
