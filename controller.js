@@ -146,7 +146,7 @@ class GameController {
         let endY = touch.clientY;
 
         this.view.updateText(`endX: ${endX}; endY: ${endY}`);
-        // this.handleSwipe(this.startX, this.startY, endX, endY);
+        this.handleSwipe(this.startX, this.startY, endX, endY);
     }
 
     handleSwipe(startX, startY, endX, endY) {
