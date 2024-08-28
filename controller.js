@@ -7,11 +7,6 @@ class GameController {
         this.view = view;
         this.sleepNow = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
 
-        document.addEventListener('keydown', this.handleKeyPress.bind(this));
-
-        // Initialize the game
-        this.initializeGame();
-
         // Set up the restart button properly
         const restartButton = document.getElementById('restart-button');
         restartButton.addEventListener('click', this.initializeGame.bind(this));
@@ -22,13 +17,23 @@ class GameController {
 
         // Set up load button
         this.setupLoadButton();
+
+        // Initialize the game
+        this.initializeGame();
     }
 
     initializeGame() {
+        // Set up the game in the model
         this.model.initializeGame();
+
+        // Initialise the view
         this.view.updateGrid(this.model.grid, this.model.movedTiles);
         this.view.updateScore(this.model.score);
         this.view.updateText('Play with the arrow keys or WASD!');
+
+        // Set up controls
+        document.addEventListener('keydown', this.handleKeyPress.bind(this));
+        this.setupTouchControls();
     }
 
     async addRandomTile() {
@@ -72,18 +77,69 @@ class GameController {
                 break;
         }
 
-        if (moved) {
-            this.view.updateGrid(this.model.grid, this.model.movedTiles);
-            this.view.updateScore(this.model.score);
-            this.view.updateText('Play with the arrow keys or WASD!');
+        if (moved) this.handleMoved();
+    }
 
-            // Add and merge cells on appropriate actual delays
-            this.addRandomTile();
-            this.mergeCells();
+    setupTouchControls() {
+        let startX, startY, endX, endY;
+        const gridContainer = document.getElementById('grid-container');
 
-            if (!this.model.canMove()) {
-                this.view.updateText('Game over!');
+        // Detect touch start and end
+        gridContainer.addEventListener('touchstart', this.handleTouchStart.bind(this));
+        gridContainer.addEventListener('touchend', this.handleTouchEnd.bind(this));
+    }
+
+    handleTouchStart(event) {
+        this.startX = event.touches[0].clientX;
+        this.startY = event.touches[0].clientY;
+    }
+
+    handleTouchEnd(event) {
+        endX = event.touches[0].clientX;
+        endY = event.touches[0].clientY;
+        this.handleSwipe(this.startX, this.startY, endX, endY);
+    }
+
+    handleSwipe(startX, startY, endX, endY) {
+        const minThreshold = 30;
+        const diffX = endX - startX;
+        const diffY = endY - startY;
+        let moved = false;
+
+        if (Math.abs(diffX) > Math.abs(diffY)) {
+            // Horizontal swipe
+            if (diffX > minThreshold) {
+                moved = this.model.moveRight();
+            } else if (diffX < -minThreshold) {
+                moved = this.model.moveLeft();
             }
+        } else {
+            // Vertical swipe
+            if (diffY > minThreshold) {
+                moved = this.model.moveDown();
+            } else if (diffY < -minThreshold) {
+                moved = this.model.moveUp();
+            }
+        }
+
+        if (moved) this.handleMoved();
+    }
+
+    handleMoved() {
+        this.view.updateGrid(this.model.grid, this.model.movedTiles);
+        this.view.updateScore(this.model.score);
+        this.view.updateText('Play with the arrow keys or WASD!');
+
+        // Add and merge cells on appropriate actual delays
+        this.addRandomTile();
+        this.mergeCells();
+
+        if (!this.model.canMove()) {
+            this.view.updateText('Game over!');
+            document.removeEventListener('keydown', this.handleKeyPress.bind(this));
+            const gridContainer = document.getElementById('grid-container');
+            gridContainer.removeEventListener('touchstart', this.handleTouchStart.bind(this));
+            gridContainer.removeEventListener('touchend', this.handleTouchEnd.bind(this));
         }
     }
 
