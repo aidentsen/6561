@@ -7,6 +7,7 @@ body {
     margin: 0;
     background-color: #faf8ef;
     padding: 20px; /* Added padding for better spacing on smaller screens */
+    box-sizing: border-box; /* Ensures padding is included in dimensions */
 }
 
 .game-container {
