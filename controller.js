@@ -86,7 +86,8 @@ class GameController {
         const gridContainer = document.getElementById('grid-container');
 
         // Initialise Hammer.js on the grid container
-        this.hammer = new Hammer(gridContainer);
+        this.hammer = new Hammer.Manager(gridContainer);
+        this.hammer.add(Hammer.Swipe());
 
         // Add event listeners for the swipe gestures
         this.hammer.on('swipeleft', () => this.handleSwipe('left'));
