@@ -145,12 +145,34 @@ class GameController {
         let endX = touch.clientX;
         let endY = touch.clientY;
 
-        this.view.updateText(`endX: ${endX}; endY: ${endY}`);
-        this.handleSwipe(this.startX, this.startY, endX, endY);
+        const minThreshold = 30;
+        const diffX = endX - this.startX;
+        const diffY = endY - this.startY;
+        this.view.updateText(`diffX: ${diffX}; diffY: ${diffY}`);
+        let moved = false;
+
+        if (Math.abs(diffX) > Math.abs(diffY)) {
+            // Horizontal swipe
+            if (diffX > minThreshold) {
+                moved = this.model.moveRight();
+            } else if (diffX < -minThreshold) {
+                moved = this.model.moveLeft();
+            }
+        } else {
+            // Vertical swipe
+            if (diffY > minThreshold) {
+                moved = this.model.moveDown();
+            } else if (diffY < -minThreshold) {
+                moved = this.model.moveUp();
+            }
+        }
+
+        if (moved) this.handleMoved();
     }
 
+    /*
     handleSwipe(startX, startY, endX, endY) {
-        const minThreshold = 10;
+        const minThreshold = 30;
         const diffX = endX - startX;
         const diffY = endY - startY;
         this.view.updateText(`diffX: ${diffX}; diffY: ${diffY}`);
@@ -174,6 +196,7 @@ class GameController {
 
         if (moved) this.handleMoved();
     }
+     */
 
     handleMoved() {
         console.log('Event listener triggered');
