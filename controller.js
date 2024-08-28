@@ -121,10 +121,7 @@ class GameController {
      */
 
     setupTouchControls() {
-        let startX, startY, endX, endY;
         const gridContainer = document.getElementById('grid-container');
-        this.touchStartEvent = 'ontouchstart' in window ? 'touchstart' : 'mousedown';
-        this.touchEndEvent = 'ontouchend' in window ? 'touchend' : 'mouseup';
 
         // Detect touch start and end
         gridContainer.addEventListener('touchstart', this.handleTouchStart.bind(this));
@@ -133,15 +130,14 @@ class GameController {
 
     handleTouchStart(event) {
         event.preventDefault();
-        const touch = event.touches ? event.touches[0] : event;
+        const touch = event.touches[0];
         this.startX = touch.clientX;
         this.startY = touch.clientY;
-        this.view.updateText(`startX: ${this.startX}; startY: ${this.startY}`);
     }
 
     handleTouchEnd(event) {
         event.preventDefault();
-        const touch = event.changedTouches ? event.changedTouches[0] : event;
+        const touch = event.changedTouches[0];
         let endX = touch.clientX;
         let endY = touch.clientY;
 
