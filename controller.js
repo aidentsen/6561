@@ -83,20 +83,22 @@ class GameController {
     setupTouchControls() {
         let startX, startY, endX, endY;
         const gridContainer = document.getElementById('grid-container');
+        this.touchStartEvent = 'ontouchstart' in window ? 'touchstart' : 'pointerdown';
+        this.touchEndEvent = 'ontouchend' in window ? 'touchend' : 'pointerup';
 
         // Detect touch start and end
-        gridContainer.addEventListener('touchstart', this.handleTouchStart.bind(this));
-        gridContainer.addEventListener('touchend', this.handleTouchEnd.bind(this));
+        gridContainer.addEventListener(this.touchStartEvent, this.handleTouchStart.bind(this));
+        gridContainer.addEventListener(this.touchEndEvent, this.handleTouchEnd.bind(this));
     }
 
     handleTouchStart(event) {
-        // event.preventDefault();
+        event.preventDefault();
         this.startX = event.touches[0].clientX;
         this.startY = event.touches[0].clientY;
     }
 
     handleTouchEnd(event) {
-        // event.preventDefault();
+        event.preventDefault();
         endX = event.touches[0].clientX;
         endY = event.touches[0].clientY;
         this.handleSwipe(this.startX, this.startY, endX, endY);
@@ -142,8 +144,8 @@ class GameController {
             this.view.updateText('Game over!');
             document.removeEventListener('keydown', this.handleKeyPress.bind(this));
             const gridContainer = document.getElementById('grid-container');
-            gridContainer.removeEventListener('touchstart', this.handleTouchStart.bind(this));
-            gridContainer.removeEventListener('touchend', this.handleTouchEnd.bind(this));
+            gridContainer.removeEventListener(this.touchStartEvent, this.handleTouchStart.bind(this));
+            gridContainer.removeEventListener(this.touchEndEvent, this.handleTouchEnd.bind(this));
         }
     }
 
