@@ -127,8 +127,8 @@ class GameController {
         this.touchEndEvent = 'ontouchend' in window ? 'touchend' : 'mouseup';
 
         // Detect touch start and end
-        gridContainer.addEventListener(this.touchStartEvent, this.handleTouchStart.bind(this));
-        gridContainer.addEventListener(this.touchEndEvent, this.handleTouchEnd.bind(this));
+        gridContainer.addEventListener('touchstart', this.handleTouchStart.bind(this));
+        gridContainer.addEventListener('touchend', this.handleTouchEnd.bind(this));
     }
 
     handleTouchStart(event) {
@@ -148,7 +148,6 @@ class GameController {
         const minThreshold = 30;
         const diffX = endX - this.startX;
         const diffY = endY - this.startY;
-        this.view.updateText(`diffX: ${diffX}; diffY: ${diffY}`);
         let moved = false;
 
         if (Math.abs(diffX) > Math.abs(diffY)) {
