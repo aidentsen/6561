@@ -121,7 +121,7 @@ button {
 .tile-177147 { background-color: #8decf3; }
 
 /* Mobile adjustments */
-@media (max-width: 375px) {
+@media (max-width: 400px) {
     .game-container {
         padding: 10px; /* Adjust padding to prevent content overflow */
     }
