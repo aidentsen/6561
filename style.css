@@ -116,7 +116,7 @@ button {
 /* Ensures proper centring on small devices */
 @media (max-width: 375px) {
     html, body {
-        min-height: 100vh;
+        max-height: 100vh;
         display: block; /* Fall back to block display for better compatibility */
     }
 
